@@ -135,51 +135,69 @@ test("Open Search bar Type : Iphone 17Pro & Print all options", async ({ page })
         { ignoreCase: true }
     );
     console.log("\nUser lands on Correct Page of :", text);
-    ///////////////////////////
 
-    // Click product & catch new tab
-    const [newTab] = await Promise.all([
-        page.waitForEvent("popup"),
-        page.getByRole('link', { name: /iPhone 17 Pro Max 256 GB/i }).first().click()     // whatever First link I get on page result either Orange or deep Blue colour Iphone 
-    ]);
+  /*  // Locate the 256 GB filter checkbox or link
+const filter = page.locator("//span[@class='a-size-base a-color-base' and text()='256 GB']");
 
-    await newTab.waitForLoadState();  // ensure tab loaded
-    await newTab.setViewportSize({ width: 1920, height: 1080 });
-    console.log("\nProduct is opened in new Tab Successfully")
+// Scroll into view & click
+await filter.scrollIntoViewIfNeeded();
+await filter.click();
 
-    // Click Add to Cart on the new tab
-    await newTab.getByRole('button', { name: /Add to Cart/i }).first().click();
+// ✅ Verify filter applied
+// Option 1: Check URL now contains `256`
+await expect(page).toHaveURL(/256/);
+
+// Option 2: Check “256 GB” appears as an active filter chip
+const activeFilter = page.locator("//span[contains(., '256 GB')]");
+await expect(activeFilter).toBeVisible();
+
+console.log("✅ 256 GB filter applied successfully and verified!");*/
+
+// Click product & catch new tab
+const [newTab] = await Promise.all([
+    page.waitForEvent("popup"),
+    page.getByRole('link', { name: /iPhone 17 Pro Max 256 GB/i }).first().click()     // whatever First link I get on page result either Orange or deep Blue colour Iphone 
+]);
 
 
-    // METHOD 1: Check "Added to Cart"
-    const successMsg = newTab.locator('#NATC_SMART_WAGON_CONF_MSG_SUCCESS');
-    await expect(successMsg).toBeVisible();
-    console.log("\nProduct added to cart successfully Checked")
+await newTab.waitForLoadState();  // ensure tab loaded
+await newTab.setViewportSize({ width: 1920, height: 1080 });
+console.log("\nProduct is opened in new Tab Successfully")
 
 
-    // Print out product Name,Quantity, subtotal:(//span[@class="a-price sw-subtotal-amount"])
+// Click Add to Cart on the new tab
+await newTab.getByRole('button', { name: /Add to Cart/i }).first().click();
+
+
+// METHOD 1: Check "Added to Cart"
+const successMsg = newTab.locator('#NATC_SMART_WAGON_CONF_MSG_SUCCESS');
+await expect(successMsg).toBeVisible();
+console.log("\nProduct added to cart successfully Checked")
+
+
+// Print out product Name,Quantity, subtotal:(//span[@class="a-price sw-subtotal-amount"])
 // Get Colour
 const colour = await newTab
-  .locator("//li[contains(@class,'sw-product-variation')]//span[contains(text(),'Colour')]/following-sibling::span")
-  .textContent();
+    .locator("//li[contains(@class,'sw-product-variation')]//span[contains(text(),'Colour')]/following-sibling::span")
+    .textContent();
 
 // Get Size
 const size = await newTab
-  .locator("//li[contains(@class,'sw-product-variation')]//span[contains(text(),'Size')]/following-sibling::span")
-  .textContent();
+    .locator("//li[contains(@class,'sw-product-variation')]//span[contains(text(),'Size')]/following-sibling::span")
+    .textContent();
 
 // console.log("Product Variant:", `${colour.trim()} ${size.trim()}`);
 
 // Extract cart subtotal
 const subtotal = await newTab
-  .locator('//span[@class="a-price sw-subtotal-amount"]//span[@class="a-offscreen"]')
-  .textContent();
+    .locator('//span[@class="a-price sw-subtotal-amount"]//span[@class="a-offscreen"]')
+    .textContent();
 
 console.log("====================================");
 console.log("🛒 Product Added to Cart Details:");
-console.log("📦 Product Variant :", `${colour.trim()} ${size.trim() }}`);
+console.log("📦 Product Variant :", `${colour.trim()} ${size.trim()}}`);
 console.log("💰 Cart Subtotal :", subtotal?.trim());
 console.log("====================================");
-console.log("/n============👌Cheers👌================");
+console.log("============👌Cheers👌================");
 
 });

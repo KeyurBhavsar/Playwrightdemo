@@ -1,48 +1,31 @@
-    import { expect } from '@playwright/test';
+import { expect } from '@playwright/test';
 
-    exports.CartPage = class CartPage {
-    
-    
-constructor(page) {
-    
-    this.page = page;
-    this.productList = '.inventory_item_name';
-    // 🎯 Define the locator here
-    this.yourCartTitle = page.getByText("Your Cart", { exact: true });
+export class CartPage {
 
-}
+    constructor(page) {
+        this.page = page;
+        this.checkoutButton = page.locator('#checkout'); // Checkout button by ID
+    }
 
-async VerifyUserOnCartPage() {
-   // ✅ Use the defined locator here
-   await expect(this.yourCartTitle).toBeVisible(); 
-   
-   console.log('✅ Yes – Welcome to AddtoCart page');
-    
-   // Optional visual pause
-   await this.page.waitForTimeout(2000);
+    // Lazy locator for Your Cart title
+    yourCartTitle() {
+        return this.page.getByText("Your Cart", { exact: true });
+    }
 
-}
+    async verifyUserOnCartPage() {
+        await expect(this.yourCartTitle()).toBeVisible({ timeout: 5000 });
+        console.log('✅ Yes – Welcome to Add to Cart page');
 
-}
-/*
-        constructor(page) {
-    
-            this.page = page;
-            this.productList = '.inventory_item_name';
-            //this.YourCart= page.getByText("Your Cart", { exact: true });
-    
-        }
-        async VerifyUserOnCartPage() {
-           // await expect(this.page.locator("//span[text()='Your Cart']")).toContainText('Your Cart');  // not works 
-            await expect(this.page.getByText("Your Cart", { exact: true }))
-        .toBeVisible();
-            console.log('✅ Yes – Welcome to AddtoCart page');
-            
         // Optional visual pause
-            await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(2000);
+    }
 
-        }
+    async verifyAndClickCheckoutButton() {
+        await expect(this.checkoutButton).toBeVisible({ timeout: 5000 });
+        console.log('✅ Checkout button is visible');
 
+        await this.checkoutButton.click();
+        console.log('✅ Clicked on Checkout button');
+    }
 
 }
-*/

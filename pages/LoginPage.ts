@@ -20,7 +20,6 @@ exports.LoginPage = class LoginPage {
         await this.page.locator(this.loginBtn).click();
 
         console.log(`********\n Login Successful User: ${username}\n********`);
-
     }
 
 } 

@@ -11,11 +11,20 @@ exports.HomePage = class HomePage {
 
     }
     async VerifyUserOnHomePage() {
-        await expect(this.page.locator("//span[@data-test='title']"))
-            .toContainText('Products');
+    
+            // Verify URL
+           // await expect(this.page).toHaveURL(/inventory.html/);
+        
+            // Verify Swag Labs header is visible
+            const headerLabel = this.page.locator('.header_label');
+            await expect(headerLabel).toBeVisible();
+        
+            // Optional: Verify exact text
+            await expect(headerLabel).toHaveText('Swag Labs');
+        
+            console.log('✅ User successfully navigated to Home Page');
+        }
 
-        console.log('✅ Yes – Welcome to Home Page');
-    }
     /*
         async productlistavailable() {
             try {
