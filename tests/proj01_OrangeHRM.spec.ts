@@ -33,8 +33,6 @@ await page.setViewportSize({ width: 1920, height: 1080 });
 
   // Print message
   console.log("🎉 Login successful!");
-  //refresh the page 
-  await page.reload();
 
 // Print homepage title 
 const pagetitle = await page.title();
@@ -147,7 +145,3 @@ const pastEmployeeSwitch = page.locator("//label[contains(@class,'oxd-switch-wra
 await page.waitForTimeout(2000);
 await pastEmployeeSwitch.click();
 });
-
-
-
-

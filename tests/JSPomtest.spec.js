@@ -1,10 +1,26 @@
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { HomePage } from '../pages/HomePage';
-import { CartPage } from '../pages/CartPage';
-import { CheckoutInfoPage } from '../pages/CheckoutInfoPage';
-import { FinalPage } from '../pages/FinalPage';
-import { readUsersFromExcel } from '../data/excelUtils';
+// ===================================================================
+// JAVASCRIPT VERSION - POM Test Spec
+// ===================================================================
+// CONVERSION NOTES:
+// TypeScript: import { test, expect } from '@playwright/test';
+// JavaScript: const { test, expect } = require('@playwright/test');
+//
+// TypeScript: import { LoginPage } from '../pages/LoginPage';
+// JavaScript: const { LoginPage } = require('../js.com.pages/LoginPage');
+//
+// TypeScript: import { readUsersFromExcel } from '../data/excelUtils';
+// JavaScript: const { readUsersFromExcel } = require('../data/excelUtils');
+//             (Note: If excelUtils is still .ts, you may need to convert it to .js)
+// ===================================================================
+
+const { test, expect } = require('@playwright/test');
+const { LoginPage } = require('../js.com.pages/LoginPage');
+const { HomePage } = require('../js.com.pages/HomePage');
+const { CartPage } = require('../js.com.pages/CartPage');
+const { CheckoutInfoPage } = require('../js.com.pages/CheckoutInfoPage');
+const { FinalPage } = require('../js.com.pages/FinalPage');
+const { readUsersFromExcel } = require('../data/excelUtils');
+
 
 const EXCEL_FILE_PATH = './data/testlogin.xlsx';
 const testUsers = readUsersFromExcel(EXCEL_FILE_PATH);
@@ -63,16 +79,18 @@ test.describe('E-commerce Workflow Tests (Data-Driven)', { tag: '@smoke' }, () =
           '380050'
         );
         await checkoutPage.clickContinue();
+        
 
         /* ===================== Final Page ===================== */
         const finalPage = new FinalPage(page);
         await finalPage.verifyFinalPageTitle();
 
-        // ======= Test Completion =======
-        console.log(`✅ Workflow successfully finished for user: ${username}`);
-        console.log('---------------------- ALL TEST STEPS PASSED ------------------------\n');
 
+        /* ===================== Test Completion ===================== */
+        console.log(`✅ Workflow completed successfully for user: ${username}`);
+        console.log(`----------------------Cheers------------------------\n`);
       }
     );
   }
 });
+

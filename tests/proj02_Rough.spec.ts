@@ -6,7 +6,6 @@ test('MyTest- ', async ({ page }) => {
 
     // Go to Website
     await page.goto("https://www.amazon.in/ref=nav_logo");
-
     await page.setViewportSize({ width: 1920, height: 1080 });  // Please update width & height here ,Window Screen Resolution as per your Device
 
     // To Verify Page Title 
@@ -14,9 +13,7 @@ test('MyTest- ', async ({ page }) => {
     await expect.soft(page).toHaveTitle(
         "Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in"
     );
-
     console.log(" Test continues even if title did NOT match");
-
 
     //1.  Check how many links there and PrintOut
     const links = await page.$$('a');

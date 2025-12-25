@@ -1,0 +1,8 @@
+- [x] Fix the afterAll hook by removing the incorrect page parameter
+- [x] Replace Employee Id locator with getByLabel('Employee Id')
+- [x] Replace Other Id locator with getByLabel('Other Id')
+- [x] Replace Driver's License Number locator with getByLabel("Driver's License Number")
+- [x] Replace License Expiry Date locator with getByLabel('License Expiry Date')
+- [x] Replace Date of Birth locator with getByLabel('Date of Birth')
+- [x] Replace Nationality dropdown locator with getByRole('combobox', { name: 'Nationality' })
+- [ ] Replace Marital Status dropdown locator with getByRole('combobox', { name: 'Marital Status' })
