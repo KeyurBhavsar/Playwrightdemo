@@ -60,6 +60,8 @@ test.describe('E-commerce Workflow Tests (Data-Driven)', { tag: '@smoke' }, () =
         /* ===================== Home Page ===================== */
         const homepage = new HomePage(page);
         await homepage.VerifyUserOnHomePage();
+        await homepage.VerifyPopupOnHomePage();
+
         await homepage.productlistavailable();
         await homepage.AddProductToCart('Sauce Labs Bolt T-Shirt');
         await homepage.newTabWorkflow();

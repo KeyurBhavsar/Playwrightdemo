@@ -84,7 +84,6 @@ test('My Info – Print details and fill personal & contact data', async ({ page
   console.log('Last Name  :', lastNameValue);
   console.log(`Full Name  : ${firstNameValue} ${middleNameValue} ${lastNameValue}`);
 
-
   // ================= PERSONAL DETAILS =================
 
   // Employee Id

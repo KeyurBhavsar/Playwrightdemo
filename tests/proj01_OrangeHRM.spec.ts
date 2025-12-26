@@ -10,7 +10,6 @@ await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/lo
 
 await page.setViewportSize({ width: 1920, height: 1080 });
 
-
   // Locate the Username field and type the username
   await page.fill('input[name="username"]','Admin');
   // Locate the Password field and type the password

@@ -13,9 +13,16 @@ class HomePage {
         const headerLabel = this.page.locator('.header_label');
         await expect(headerLabel).toBeVisible();
         await expect(headerLabel).toHaveText('Swag Labs');
-
         console.log('✅ User successfully navigated to Home Page');
     }
+
+    async  VerifyPopupOnHomePage(page) {
+        page.on('dialog', async dialog => {
+          console.log(`⚠️ Dialog appeared with message: "${dialog.message()}"`);
+          await dialog.accept();  // or use dialog.dismiss() if you want to accept the dialog
+          console.log('Dialog was accepted successfully.');
+        });
+      }
 
     // ============== PRODUCT LIST ==================
     async productlistavailable() {
